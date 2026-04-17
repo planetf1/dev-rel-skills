@@ -8,6 +8,11 @@ description: >-
 
 # Write a Technical Blog Post
 
+> **Shared guidelines apply.** Before writing, read
+> `skills/_shared/content-guidelines.md` for voice, values (no hype, no
+> competitor blame, code-first), and Granite positioning rules. Those
+> rules override any conflicting guidance below.
+
 Use this skill when drafting or reviewing a technical blog post about a new
 code feature, capability, or release. Apply the checklist and structure below
 to produce a post that is credible, scannable, and genuinely useful to

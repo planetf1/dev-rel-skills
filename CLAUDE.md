@@ -6,6 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A collection of Claude Code agent skills for developer relations work. Skills are defined as SKILL.md files under `skills/` and are installed via `./install-skills.sh`, which symlinks them into `~/.claude/skills/`. There is no build system, test suite, or runtime — the "application" is the prompt instructions themselves.
 
+## Shared Content Guidelines
+
+All content-creation skills reference `skills/_shared/content-guidelines.md` — a single source of truth for voice, values, and messaging rules. Key non-negotiables:
+
+- **Integrity**: no hype, no unverifiable claims, acknowledge limitations
+- **No competitor blame**: differentiate on merits, never attack alternatives
+- **Positive framing**: lead with capability, not with what's broken
+- **Code-first**: every content asset includes or links to working code
+- **Mellea + Granite positioning**: model-agnostic by default, Granite as a highlighted example where appropriate
+
 ## Skill Architecture
 
 Each skill lives in `skills/<skill-name>/SKILL.md`. Skills are designed to work as a pipeline:
@@ -16,6 +26,8 @@ Each skill lives in `skills/<skill-name>/SKILL.md`. Skills are designed to work 
 3. `/release-blog` — Drafts a full release post from the latest GitHub release, scoring PRs into Highlight (≥50), Mention (10–49), and Skip (<10) tiers
 4. `/write-technical-blog` — Deep-dive post guide drawing on best practices from Stripe, GitHub, Cloudflare, HashiCorp, and Google engineering blogs
 5. `/write-tweet` — Generates tweet threads with proven opening formulas and per-announcement-type content rules
+5b. `/write-linkedin-post` — Writes LinkedIn posts optimized for the 2025-2026 algorithm: personal account, no body links, narrative hooks, carousel recommendations
+5c. `/write-youtube-script` — Writes video scripts in two formats: short demo (2-5 min) and long walkthrough (10-20 min), with screen recording notes and YouTube SEO
 6. `/de-llmify` — Edits writing to remove LLM-generated text patterns before publishing
 7. `/validate-snippets` — Extracts fenced code blocks from writing, executes each, and reports pass/fail/skip results
 8. `/link-preview` — Generates a link preview snippet (markdown card with code snippet, Open Graph tags, Twitter Card) for a finished post or external URL
@@ -45,6 +57,8 @@ Skills write their output to the working directory:
 - Release blog posts → `blog-release-vX.Y.Z.md`
 - Feature blog posts → `blog-<slug>.md`
 - Tweet threads → `tweet-<slug>.md`
+- LinkedIn posts → `linkedin-<slug>.md`
+- Video scripts → `video-<slug>.md` / `video-demo-<slug>.md` / `video-walkthrough-<slug>.md`
 - Snippet validation reports → `snippet-report-<slug>.md`
 - Link preview snippets → `link-preview-<slug>.md`
 

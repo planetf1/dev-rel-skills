@@ -8,6 +8,11 @@ description: >-
 
 # Write a Technical Tweet
 
+> **Shared guidelines apply.** Before writing, read
+> `skills/_shared/content-guidelines.md` for voice, values (no hype, no
+> competitor blame, code-first), and Granite positioning rules. Those
+> rules override any conflicting guidance below.
+
 Use this skill to write one or more tweets about a technical feature, release,
 bug fix, refactor, milestone, or concept — optimized for developer audience
 engagement on Twitter/X.
@@ -290,3 +295,17 @@ Character counts:
 - **Overly long threads for minor features**: length should match significance — a bug fix that deserves 2 tweets shouldn't get 10
 - **Generic "what do you think?" CTA**: ask a specific, genuine question tied to the content if you want replies
 - **Marketing copy voice**: "best-in-class," "game-changing," "enterprise-grade" — these activate developer skepticism immediately
+- **Cross-posting to LinkedIn**: LinkedIn and X are different platforms with different audiences, formats, and algorithms. A tweet thread copy-pasted to LinkedIn will underperform. Use `/write-linkedin-post` to write LinkedIn-native content separately.
+
+---
+
+## Related Skills
+
+- `/write-linkedin-post` — write the LinkedIn version of the same content
+  (fundamentally different content, not a cross-post)
+- `/write-technical-blog` — write the blog post that the tweet will link to
+- `/release-blog` — draft a release blog post, then use this skill to
+  write the tweet promotion
+- `/de-llmify` — run over drafted tweets to remove LLM writing patterns
+- `/link-preview` — generate Twitter Card meta tags so the link renders
+  well when shared

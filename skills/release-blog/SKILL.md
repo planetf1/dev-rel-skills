@@ -8,6 +8,11 @@ description: >-
 
 # Draft a Release Blog Post from the Latest GitHub Release
 
+> **Shared guidelines apply.** Before writing, read
+> `skills/_shared/content-guidelines.md` for voice, values (no hype, no
+> competitor blame, code-first), and Granite positioning rules. Those
+> rules override any conflicting guidance below.
+
 Fetch the latest release from the target repo, identify the highest-impact
 changes, and produce a publication-ready blog post draft.
 
@@ -329,9 +334,27 @@ After writing the file, confirm the path to the user.
 
 ---
 
+## Next Steps
+
+After the blog post is drafted, promote it across channels:
+
+1. Run `/validate-snippets` on the blog to verify all code examples work
+2. Run `/de-llmify` to remove any LLM writing patterns
+3. Run `/link-preview` to generate Open Graph and Twitter Card meta tags
+4. Run `/write-tweet` to draft the X/Twitter promotion
+5. Run `/write-linkedin-post` to draft the LinkedIn promotion (different
+   content from the tweet — LinkedIn rewards narrative depth, not speed)
+
+---
+
 ## Related Skills
 
 - `/get-blog-candidates` — rank PRs across multiple recent releases (not
   release-specific)
 - `/write-technical-blog` — write a deep-dive post about a single feature
   rather than a release summary
+- `/write-tweet` — promote the release on X/Twitter
+- `/write-linkedin-post` — promote the release on LinkedIn
+- `/link-preview` — generate social sharing metadata for the blog post
+- `/validate-snippets` — verify all code examples in the post before publishing
+- `/de-llmify` — remove LLM writing patterns before publishing

@@ -54,6 +54,24 @@ Writes high-engagement tweets or threads about technical content. Classifies the
 /write-tweet [topic, PR number, path/to/post.md, or "thread about X"]
 ```
 
+### `/write-linkedin-post`
+
+Writes LinkedIn posts optimized for the 2025-2026 algorithm. Key rules: post from a personal account (not company page), no external links in the post body (link in first comment), lead with the problem not the product, 800-1,200 characters. Includes carousel recommendations, hashtag strategy, and engagement timing. Writes output to `linkedin-<slug>.md` with the post, first comment draft, and media recommendation.
+
+```
+/write-linkedin-post [topic, PR number, path/to/post.md, or description]
+```
+
+### `/write-youtube-script`
+
+Writes video scripts in two formats: short demo (2-5 min) and long walkthrough (10-20 min). Includes screen recording notes, YouTube title/thumbnail optimization, and a description template with timestamp chapters. Writes output to `video-<slug>.md`.
+
+```
+/write-youtube-script [topic, PR number, path/to/post.md, or description]
+/write-youtube-script --short "mellea 0.5.0 m serve demo"
+/write-youtube-script --long "build a RAG pipeline with mellea"
+```
+
 ### `/validate-snippets`
 
 Extracts every fenced code block from a markdown file, executes each one, and reports which pass, fail, or were skipped. Supports Python, Go, JavaScript, TypeScript, and shell. Non-code blocks (JSON, YAML, output, etc.) are automatically skipped. Writes a detailed report and offers to fix failing snippets in place.
@@ -78,6 +96,16 @@ Generates a link preview snippet for a post — markdown link card (with an eye-
 /link-preview [path/to/post.md or URL]
 ```
 
+## Shared Content Guidelines
+
+All content-creation skills (`write-tweet`, `write-linkedin-post`, `write-technical-blog`, `write-youtube-script`, `release-blog`) reference shared voice, values, and messaging rules in `skills/_shared/content-guidelines.md`. Key non-negotiables:
+
+- **Integrity** — no hype, no unverifiable claims, acknowledge limitations
+- **No competitor blame** — differentiate on merits, never attack alternatives
+- **Positive framing** — lead with capability, not with what's broken
+- **Code-first** — every content asset includes or links to working code
+- **Mellea + Granite positioning** — model-agnostic by default, Granite as a highlighted example where appropriate
+
 ## Setup
 
 Run the install script to symlink all skills into `~/.claude/skills/`:
@@ -98,4 +126,4 @@ A typical dev-rel workflow using these skills:
 4. **Validate** — run `/validate-snippets` on the draft to make sure all code examples actually work
 5. **Polish** — run `/de-llmify` on any generated content to remove AI writing tells before publishing
 6. **Preview** — run `/link-preview` on the finished post to produce a link card and OG meta tags that make other posts want to link back
-7. **Promote** — run `/write-tweet` on the resulting blog post file to generate a thread that drives readers to it
+7. **Promote** — run `/write-tweet`, `/write-linkedin-post`, and/or `/write-youtube-script` to promote across channels. Each produces channel-native content — never cross-post verbatim.

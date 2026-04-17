@@ -60,7 +60,7 @@ available) a quick fetch of the linked content.
 | Signal | Weight |
 |--------|--------|
 | Title contains: LLM, GPT, Claude, AI, ML, model, inference, transformer, embedding, RAG, agent, fine-tun, prompt, diffusion, neural, deep learning, GenAI, generative, multimodal, vision model, language model, copilot, assistant, chatbot, reasoning, chain-of-thought, MCP, tool use, function calling | High |
-| Title contains: Python, API, structured output, schema, validation, type-safe, Pydantic | Medium (mellea-adjacent tech) |
+| Title contains: Python, API, structured output, schema, validation, type-safe, Pydantic, OpenTelemetry, observability, guardrails, safety, constrained decoding, grammar | Medium (mellea-adjacent tech) |
 | URL domain is: openai.com, anthropic.com, huggingface.co, arxiv.org (cs.AI/cs.CL/cs.LG), ollama.com, together.ai, replicate.com, deepmind.google, ai.meta.com | High |
 | HN score >= 100 AND title mentions any programming/tech concept alongside AI | Medium |
 
@@ -83,13 +83,42 @@ HN comments thread at `https://news.ycombinator.com/item?id={id}` instead.
 For each AI-relevant post, evaluate the mellea integration potential. Mellea is
 a Python library for structured generative programs — its strengths are:
 
+**Core capabilities:**
 - **Structured output via Pydantic**: any scenario needing typed, validated LLM output
 - **Requirements + repair**: attach natural-language constraints and auto-retry on failure
-- **Sampling strategies**: rejection sampling, majority voting for higher-quality results
-- **Multi-backend**: works with Ollama, OpenAI, vLLM, HuggingFace, WatsonX, LiteLLM, Bedrock
+- **Sampling strategies**: rejection sampling, majority voting, best-of-n, SOFAI for higher-quality results
 - **@generative decorator**: turns typed Python functions into LLM calls — no prompt templates
 - **MCP tool exposure**: any generative program can be served as an MCP tool
 - **mify utility**: drop mellea into existing codebases incrementally
+- **ReACT agents**: built-in agent loop with structured output and tool calling
+- **`@tool` decorator**: define tools from typed functions with automatic schema generation; import tools from LangChain and smolagents
+- **Built-in code interpreter**: sandboxed code execution as a tool
+- **Images and vision**: pass images to any vision-capable backend via ImageBlock
+
+**Inference-time scaling:**
+- **Process Reward Models (PRMs)**: reward-model-guided scoring for inference-time compute scaling
+- **Uncertainty Quantification (UQ)**: intrinsic for calibrating confidence in LLM outputs
+
+**Document processing:**
+- **RichDocument / Docling integration**: load PDFs, extract tables as MObjects, query and transform documents with LLM assistance
+- **Query clarification for RAG**: built-in intrinsic that refines ambiguous queries before retrieval
+
+**Backend support:**
+- **Multi-backend**: Ollama (default), OpenAI, HuggingFace, LiteLLM (100+ providers incl. Anthropic, AWS Bedrock, Azure, Vertex AI), WatsonX, LangChain/smolagents tool interop
+- **Constrained decoding**: grammar-enforced generation for Ollama and HuggingFace — valid output at the token level, not retried into existence
+- **Cache backend**: cache inference results for cost optimization and latency reduction
+- **Granite 4 hybrid models**: optimized support for IBM's current model family
+
+**Observability & safety (v0.4.x):**
+- **Hooks / plugin system**: callback functions at LLM generation, tool invocation, sampling loop, and session lifecycle points — for logging, caching, PII redaction, retries, circuit breakers
+- **OpenTelemetry integration**: OTLP + Prometheus exporters for metrics and tracing
+- **GuardianLib intrinsics**: safety checks for harmful, off-topic, or hallucinated outputs
+- **Context attribution**: trace which context sources contributed to a generation
+
+**CLI & serving:**
+- **`m serve`**: OpenAI API-compatible HTTP endpoint (structured output + tool calling)
+- **`m decompose`**: automatic task decomposition pipeline
+- **`m alora`**: fine-tune and upload LoRA adapters
 
 Score each post on two axes:
 
@@ -100,11 +129,20 @@ Score each post on two axes:
 | Post is about structured/typed LLM output, schema enforcement, or output parsing | **+50** |
 | Post involves Python + LLM integration patterns | **+40** |
 | Post discusses prompt engineering pain points mellea solves (retries, validation, structured responses) | **+40** |
-| Post is about multi-model/multi-provider patterns (mellea supports many backends) | **+35** |
-| Post is about MCP, tool use, or function calling (mellea has MCP support) | **+35** |
+| Post is about LLM observability, tracing, or metrics (mellea has OTel integration + hooks) | **+40** |
+| Post is about multi-model/multi-provider patterns (mellea supports many backends via LiteLLM) | **+35** |
+| Post is about MCP, tool use, or function calling (mellea has MCP support + m serve) | **+35** |
+| Post is about LLM safety, guardrails, or content filtering (mellea has GuardianLib) | **+35** |
+| Post is about OpenAI API compatibility or serving LLMs behind an API (mellea has m serve) | **+35** |
 | Post is about RAG, agents, or LLM pipelines that need structured intermediate steps | **+30** |
 | Post is about a new model or provider mellea already supports | **+25** |
 | Post is about LLM reliability, testing, or output quality (mellea's requirements/repair pattern) | **+25** |
+| Post is about middleware, plugins, or cross-cutting concerns for LLM apps (mellea has hooks) | **+25** |
+| Post is about document processing, PDF extraction, or table manipulation (mellea has RichDocument/Docling) | **+30** |
+| Post is about inference-time compute scaling, test-time compute, or reward models (mellea has PRMs + sampling strategies) | **+35** |
+| Post is about multimodal/vision LLMs (mellea supports images via ImageBlock on vision-capable backends) | **+25** |
+| Post is about LLM cost optimization or caching (mellea has cache backend) | **+25** |
+| Post is about code execution sandboxing or code interpreters (mellea has built-in code interpreter tool) | **+25** |
 | Post is about a new model or provider mellea could add support for | **+15** |
 | Post is about AI but in a domain far from mellea's sweet spot (robotics, hardware, policy) | **+5** |
 
