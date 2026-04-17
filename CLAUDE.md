@@ -31,8 +31,9 @@ Each skill lives in `skills/<skill-name>/SKILL.md`. Skills are designed to work 
 6. `/de-llmify` — Edits writing to remove LLM-generated text patterns before publishing
 7. `/validate-snippets` — Extracts fenced code blocks from writing, executes each, and reports pass/fail/skip results
 8. `/link-preview` — Generates a link preview snippet (markdown card with code snippet, Open Graph tags, Twitter Card) for a finished post or external URL
+9. `/release-launch-plan` — Orchestrates the full release content workflow: assesses readiness, generates a channel-specific checklist, and walks through each phase by invoking the appropriate content skills
 
-Skills can be used independently but typically flow sequentially: scout → discover → draft → validate → preview → promote.
+Skills can be used independently but typically flow sequentially: scout → discover → draft → validate → preview → promote. For releases, `/release-launch-plan` orchestrates the full pipeline.
 
 ## Target Repo Resolution
 
@@ -61,6 +62,7 @@ Skills write their output to the working directory:
 - Video scripts → `video-<slug>.md` / `video-demo-<slug>.md` / `video-walkthrough-<slug>.md`
 - Snippet validation reports → `snippet-report-<slug>.md`
 - Link preview snippets → `link-preview-<slug>.md`
+- Release launch plans → `release-plan-vX.Y.Z.md`
 
 See `demos/` for real examples of each output type.
 

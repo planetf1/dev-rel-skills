@@ -96,6 +96,14 @@ Generates a link preview snippet for a post — markdown link card (with an eye-
 /link-preview [path/to/post.md or URL]
 ```
 
+### `/release-launch-plan`
+
+Orchestrates the full release content workflow. Assesses what exists for a given release, generates a channel-specific checklist based on release size (patch/minor/major), and walks through each phase by offering to invoke the appropriate content skills. Writes a plan to `release-plan-vX.Y.Z.md`.
+
+```
+/release-launch-plan [--tag vX.Y.Z] [--repo owner/repo]
+```
+
 ## Shared Content Guidelines
 
 All content-creation skills (`write-tweet`, `write-linkedin-post`, `write-technical-blog`, `write-youtube-script`, `release-blog`) reference shared voice, values, and messaging rules in `skills/_shared/content-guidelines.md`. Key non-negotiables:
