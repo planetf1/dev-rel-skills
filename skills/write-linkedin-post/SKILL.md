@@ -23,6 +23,81 @@ narrative, and expertise over speed. Posts live 24-48 hours in the feed
 with a long search tail. The algorithm prioritizes "knowledge and advice"
 content — educational posts get 3-5x more reach than announcements.
 
+---
+
+## Two modes — pick one before writing
+
+LinkedIn activity for an open-source project like Mellea splits into two
+clearly different artifacts. **Ask the user which mode they want if it's
+not obvious from the request.** They produce very different output.
+
+### Mode A — Blog promo / link share (the common case)
+
+A canonical post already exists on the project's blog (mellea.ai/blogs,
+HF blog, IBM blog, etc.). LinkedIn's job is to send the author's network
+to it. The artifact is 3-6 sentences of commentary followed by the link.
+
+**Triggers:**
+- User says "advertise this post", "share this on LinkedIn", "promote
+  the blog post", "write a short LinkedIn for this".
+- User passes a URL or path to an already-published blog post.
+- User says the post is live on the site.
+
+**Output shape:**
+- 300-600 characters total.
+- Opens with **"We've just posted about…"** or similar — do NOT use
+  first-person "I wrote" (reader can see the author byline; "I" is
+  floppy filler).
+- One or two sentences framing the **benefit**, not the mechanics.
+- Reference examples generically ("with examples", "with runnable
+  code") — do NOT list or describe the specific examples. The whole
+  point is to drive the click.
+- Link goes **in the body**, last real line before hashtags. LinkedIn
+  renders the OG card, which is the promo's main visual. The usual
+  "link = 60% reach penalty" rule is worth trading against the OG card
+  for a share-style post.
+- 3-5 specific hashtags.
+- No question, no "what do you think?" CTA — a promo's CTA is the
+  click, not a comment thread.
+- No first comment needed (the link is already in the body). If the OG
+  card renders badly, fall back to link-in-first-comment.
+- No media recommendation unless the user asks — the OG card is the
+  media.
+
+**Skip for Mode A:** standalone-value rule (it's a teaser by design),
+the 800-1,200 char length target, the before/after narrative, the
+detailed engagement plan. Go to Step 8 for output format.
+
+### Mode B — LinkedIn-native article (occasional)
+
+Written directly on LinkedIn, sometimes more personal in tone, sometimes
+a perspective piece that would not fit on the canonical blog. May
+overlap with a blog post's subject but stands alone — the reader should
+not need to click anything to get the value.
+
+**Triggers:**
+- User says "write a LinkedIn article", "LinkedIn post about X" (with
+  no existing blog), "my perspective on X", "something personal for
+  LinkedIn".
+- No canonical blog post exists, or the user explicitly wants
+  LinkedIn-first content.
+
+**Output shape:**
+- 800-1,200 characters typical; up to 2,000 for architecture/design
+  pieces.
+- All the detailed guidance in the rest of this document (Steps 1-9)
+  applies.
+- Tone can be more personal than a blog — "here's what I learned",
+  "this changed how I think about X" — while still respecting the
+  shared content guidelines (no hype, no competitor blame, code-first).
+- Link (if any) in the first comment, not the body.
+- Full checklist applies.
+
+The rest of this document is written for Mode B. Mode A uses a
+dedicated output template in Step 8.
+
+---
+
 ## Usage
 
 ```
@@ -53,18 +128,19 @@ the full story. The blog link is supplementary, not the point.
 
 ## Step 1: Classify the Content Type
 
-Determine which type of content this is. The type dictates the structure
-and tone:
+**First confirm the mode (A or B above).** Mode A uses the Blog promo
+row and skips most of this table. Mode B uses the rest.
 
-| Type | LinkedIn angle | Optimal length |
-|------|---------------|----------------|
-| **Release announcement** | Problem this solves + what changed + what it unlocks | 800-1,200 chars |
-| **New feature** | Before/after narrative — how the world changed | 600-1,000 chars |
-| **Performance improvement** | Numbers + methodology + what you learned | 800-1,200 chars |
-| **Architecture / design decision** | "Here's why we chose X over Y" | 1,200-2,000 chars |
-| **Milestone** | Journey narrative, not the number | 1,000-1,500 chars |
-| **Tutorial / how-to** | "I figured out how to do X. Here's the approach:" | 1,000-1,500 chars |
-| **Concept / opinion** | Contrarian claim or non-obvious insight | 600-1,200 chars |
+| Type | Mode | LinkedIn angle | Optimal length |
+|------|------|----------------|----------------|
+| **Blog promo / link share**        | A | "We've just posted about…" + benefit + link | 300-600 chars |
+| **Release announcement**           | B | Problem this solves + what changed + what it unlocks | 800-1,200 chars |
+| **New feature**                    | B | Before/after narrative — how the world changed | 600-1,000 chars |
+| **Performance improvement**        | B | Numbers + methodology + what you learned | 800-1,200 chars |
+| **Architecture / design decision** | B | "Here's why we chose X over Y" | 1,200-2,000 chars |
+| **Milestone**                      | B | Journey narrative, not the number | 1,000-1,500 chars |
+| **Tutorial / how-to**              | B | "I figured out how to do X. Here's the approach:" | 1,000-1,500 chars |
+| **Concept / opinion**              | B | Contrarian claim or non-obvious insight | 600-1,200 chars |
 
 ---
 
@@ -279,13 +355,49 @@ Write the post to a markdown file in the current working directory:
 - Use the Write tool to create the file. Do not ask — just write it.
 - Tell the user the filename after writing.
 
-### Output file format
+### Output file format — Mode A (blog promo / link share)
+
+```markdown
+# LinkedIn Promo: <topic>
+
+Source: [path/to/blog.md](path/to/blog.md) → <https://published-url>
+Date: <today's date>
+Mode: blog-promo / link share — short teaser + link, posted from the author's account
+
+---
+
+## Post (~NNN chars)
+
+\`\`\`text
+We've just posted about <benefit-framed topic>.
+
+<One or two sentences of benefit framing. No specific examples. No "I wrote".>
+
+Full article with examples:
+<bare URL>
+
+#Tag1 #Tag2 #Tag3
+\`\`\`
+
+## Shorter variant (~NNN chars)
+
+\`\`\`text
+<300-400 char tighter version>
+\`\`\`
+
+## Notes
+
+- Bare URL placement, OG card fallback, any Granite/model-agnostic balance notes.
+```
+
+### Output file format — Mode B (LinkedIn-native article)
 
 ```markdown
 # LinkedIn Post: <topic>
 
 > Source: <PR url, file path, or description>
 > Date: <today's date>
+> Mode: LinkedIn-native article
 
 ---
 
@@ -325,6 +437,21 @@ Write the post to a markdown file in the current working directory:
 
 ## Step 9: Self-Review Checklist
 
+### Mode A — Blog promo / link share
+
+| # | Check |
+|---|-------|
+| 1 | Is the post **300-600 chars**? |
+| 2 | Does it open with **"We've just posted about…"** or equivalent — NOT "I wrote"? |
+| 3 | Is the framing **benefit-first**, not mechanics-first? |
+| 4 | Are examples referenced **generically** ("with examples") rather than listed? |
+| 5 | Is there **no question / comment-bait CTA** — just the link as the CTA? |
+| 6 | Is the link placed in the **body** (to trigger the OG card)? |
+| 7 | Are there **3-5 specific hashtags**? |
+| 8 | Does it follow the shared content guidelines (no hype, no competitor blame)? |
+
+### Mode B — LinkedIn-native article
+
 | # | Check |
 |---|-------|
 | 1 | Does the hook work **standalone in ~210 characters** (above the fold)? |
@@ -351,8 +478,10 @@ Write the post to a markdown file in the current working directory:
   with different audiences, formats, and algorithms. A tweet thread
   copy-pasted to LinkedIn will underperform. Write LinkedIn-native
   content that emphasizes the "why" narrative.
-- **Putting the link in the post body.** ~60% reach reduction. Always
-  use the first comment. This is the single biggest tactical mistake.
+- **Putting the link in the post body (Mode B).** ~60% reach reduction
+  for standalone posts. Always use the first comment for Mode B. Mode A
+  (blog promo) is the exception — the OG card from the in-body link is
+  the whole point.
 - **"Excited to announce" opener.** The algorithm and the audience both
   penalize this. It signals corporate comms, not practitioner content.
 - **Company page as primary distribution.** Personal profiles get 5-8x

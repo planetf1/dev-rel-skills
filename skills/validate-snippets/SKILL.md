@@ -245,6 +245,18 @@ Before finalizing the report, verify each item:
   on each other (e.g., snippet 2 imports a file created by snippet 1). If a
   snippet fails and references something from a prior snippet, note this in
   the report as a possible cause.
+- **Exit-0 is not output-correct**: A PASS only means the snippet ran without
+  error. It does not verify that `# Example output:` comment values (scores,
+  labels, model responses) match what the code actually produces. For docs
+  containing concrete output values, those must be checked by running the
+  example against the real target model and comparing. Flag any snippet that
+  contains `# Example output:` or similar inline expected-output comments so
+  the author knows to verify them manually.
+- **Heavy inference examples**: Snippets that load large models or adapters
+  (HuggingFace, LoRA, etc.) will time out or fail without the required
+  hardware and dependencies. Skip-classify these rather than failing the whole
+  run — look for imports of `transformers`, `peft`, or adapter-loading calls
+  as signals.
 - **Over-wrapping Go snippets**: If a snippet already has `package main`,
   don't double-wrap it.
 

@@ -2,6 +2,9 @@
 .DS_Store
 Thumbs.db
 
+# Runtime caches
+.fastembed_cache/
+
 # IDEs
 .idea/
 .vscode/
